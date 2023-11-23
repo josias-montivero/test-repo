@@ -8,6 +8,8 @@ using System.Net.Http;
 using System.Text;
 using System.Text.Json;
 using System.Threading.Tasks;
+using System.Net.Http;
+using Microsoft.Extensions.Http;
 using static BattleBitAPI.Common.PlayerStats;
 
 namespace BattleBitBaseModules;
@@ -17,7 +19,23 @@ public class BasicProgression : BattleBitModule
 {
     public BasicProgressionConfiguration Configuration { get; set; } = null!;
 
-    private static Client = new HttpClient();
+    private HttpClient _httpClient;
+
+    private HttpClient MyClient
+    {
+        get
+        {
+            if (_httpClient == null)
+            {
+                _httpClient = new HttpClient
+                {
+                    BaseAddress = new Uri($"https://srvaux01.progamerid.com/api/")
+                };
+                //Other client logic goes here
+            }
+            return _httpClient;
+        }
+    }
 
     private string dataDir => this.Configuration.PerServer ? Path.Combine(this.Configuration.DataDirectory, $"{this.Server.GameIP}:{this.Server.GamePort}") : this.Configuration.DataDirectory;
 
@@ -43,7 +61,7 @@ public class BasicProgression : BattleBitModule
         "application/json");
 
 
-        await Client.PostAsync("https://srvaux01.progamerid.com/api/v2/rivals/battlebit/", jsonContent);
+        await MyClient.PostAsync("/v2/rivals/battlebit/", jsonContent);
         if (this.Configuration.ApplyInitialStatsOnEveryJoin)
         {
             args.Stats = this.Configuration.InitialStats?.ToPlayerStats() ?? args.Stats;
@@ -77,7 +95,7 @@ public class BasicProgression : BattleBitModule
         Encoding.UTF8,
         "application/json");
 
-        await Client.PostAsync("https://srvaux01.progamerid.com/api/v2/rivals/battlebit/", jsonContent);
+        await MyClient.PostAsync("/v2/rivals/battlebit/", jsonContent);
     }
 
     public override async Task OnPlayerDisconnected(RunnerPlayer player)
@@ -90,7 +108,7 @@ public class BasicProgression : BattleBitModule
         Encoding.UTF8,
         "application/json");
 
-        await Client.PostAsync("https://srvaux01.progamerid.com/api/v2/rivals/battlebit/", jsonContent);
+        await MyClient.PostAsync("/v2/rivals/battlebit/", jsonContent);
     }
 
     public override async Task OnSavePlayerStats(ulong steamID, PlayerStats stats)
@@ -104,7 +122,7 @@ public class BasicProgression : BattleBitModule
         Encoding.UTF8,
         "application/json");
 
-        await Client.PostAsync("https://srvaux01.progamerid.com/api/v2/rivals/battlebit/", jsonContent);
+        await MyClient.PostAsync("/v2/rivals/battlebit/", jsonContent);
 
         for (int i = 0; i < 5; i++)
         {
