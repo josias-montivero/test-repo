@@ -41,7 +41,7 @@ public class BasicProgression : BattleBitModule
         "application/json");
 
 
-        await Client.PostAsync("https://srvaux01.progamerid.com/api/v2/rivals/battlebit/", jsonContent);
+        await this.Configuration.Client.PostAsync("https://srvaux01.progamerid.com/api/v2/rivals/battlebit/", jsonContent);
         if (this.Configuration.ApplyInitialStatsOnEveryJoin)
         {
             args.Stats = this.Configuration.InitialStats?.ToPlayerStats() ?? args.Stats;
@@ -75,7 +75,7 @@ public class BasicProgression : BattleBitModule
         Encoding.UTF8,
         "application/json");
 
-        await Client.PostAsync("https://srvaux01.progamerid.com/api/v2/rivals/battlebit/", jsonContent);
+        await this.Configuration.Client.PostAsync("https://srvaux01.progamerid.com/api/v2/rivals/battlebit/", jsonContent);
     }
 
     public override async Task OnPlayerDisconnected(RunnerPlayer player)
@@ -88,7 +88,7 @@ public class BasicProgression : BattleBitModule
         Encoding.UTF8,
         "application/json");
 
-        await Client.PostAsync("https://srvaux01.progamerid.com/api/v2/rivals/battlebit/", jsonContent);
+        await this.Configuration.Client.PostAsync("https://srvaux01.progamerid.com/api/v2/rivals/battlebit/", jsonContent);
     }
 
     public override async Task OnSavePlayerStats(ulong steamID, PlayerStats stats)
@@ -102,7 +102,7 @@ public class BasicProgression : BattleBitModule
         Encoding.UTF8,
         "application/json");
 
-        await Client.PostAsync("https://srvaux01.progamerid.com/api/v2/rivals/battlebit/", jsonContent);
+        await this.Configuration.Client.PostAsync("https://srvaux01.progamerid.com/api/v2/rivals/battlebit/", jsonContent);
 
         for (int i = 0; i < 5; i++)
         {
