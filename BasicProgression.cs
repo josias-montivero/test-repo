@@ -149,7 +149,7 @@ public class BasicProgressionConfiguration : ModuleConfiguration
 
     public bool ApplyInitialStatsOnEveryJoin { get; set; } = false;
 
-    public static HttpClient Client = new HttpClient();
+    public static Client = new HttpClient();
 
     public BasicPlayerStats? InitialStats { get; set; } = new BasicPlayerStats()
     {
