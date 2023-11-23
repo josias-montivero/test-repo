@@ -9,7 +9,6 @@ using System.Text;
 using System.Text.Json;
 using System.Threading.Tasks;
 using System.Net.Http;
-using Microsoft.Extensions.Http;
 using static BattleBitAPI.Common.PlayerStats;
 
 namespace BattleBitBaseModules;
