@@ -1,0 +1,51 @@
+{
+  "restrictions": {
+    "weapons": [
+    ],
+    "weapon_types": [
+    ],
+    "gadgets": [
+    ],
+    "classes": [
+    ]
+  },
+  "max_tickets": 1500,
+  "max_time": 2700,
+  "join_text": "<size=25><b>Twitch Rivals: BattleBit Remastered Team Battle II</b></size>",
+  "advertisements": [
+  ],
+  "rotations": {
+    "gamemodes": [
+      "CONQ"
+    ],
+    "maps": [
+      "Azagor",
+      "Basra",
+      "Construction",
+      "District",
+      "Dustydew",
+      "Eduardovo",
+      "Frugis",
+      "Isle",
+      "Lonovo",
+      "MultuIslands",
+      "Namak",
+      "OilDunes",
+      "River",
+      "Salhan",
+      "SandySunset",
+      "TensaTown",
+      "Valley",
+      "Wakistan",
+      "WineParadise"
+    ]
+  },
+  "welcome_messages": [
+  ],
+  "battlebit_db": {
+    "user": "root",
+    "password": "XlkAKxqSmgUektsManmAKBi2x",
+    "database": "battlebit",
+    "host": "db-hosting.cluster-coxc7j1eahih.us-east-1.rds.amazonaws.com"
+  }
+}
