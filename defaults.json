@@ -9,8 +9,8 @@
     "classes": [
     ]
   },
-  "max_tickets": 1500,
-  "max_time": 2700,
+  "max_tickets": 10,
+  "max_time": 60,
   "join_text": "<size=25><b>Twitch Rivals: BattleBit Remastered Team Battle II</b></size>",
   "advertisements": [
   ],
