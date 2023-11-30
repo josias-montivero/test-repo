@@ -30,23 +30,23 @@ public class DiscordWebhooks : BattleBitModule
 
     public override Task OnConnected()
     {
-        var payload = new
-        {
-            startMatch = false,
-            endMatch = false,
-            startConnection = true
-        };
-
-        var payloadJson = JsonSerializer.Serialize(payload);
-        var content = new StringContent(payloadJson, Encoding.UTF8, "application/json");
-        discordMessageQueue3.Enqueue(content);
-
         if (this.Server.RoundSettings.State == GameState.WaitingForPlayers)
         {
             this.Server.RoundSettings.PlayersToStart = 0;
             this.Server.RoundSettings.SecondsLeft = 180;
             this.Server.ForceStartGame();
         }
+
+        var payload22 = new
+        {
+            startMatch = false,
+            endMatch = false,
+            startConnection = true
+        };
+
+        var payloadJson22 = JsonSerializer.Serialize(payload22);
+        var content22 = new StringContent(payloadJson22, Encoding.UTF8, "application/json");
+        discordMessageQueue3.Enqueue(content22);
 
         Task.Run(() => sendChatMessagesToDiscord());
         Task.Run(() => sendChatMessagesToDiscord2());
@@ -105,6 +105,17 @@ public class DiscordWebhooks : BattleBitModule
         switch (newState)
         {
             case GameState.WaitingForPlayers:
+                var payload22 = new
+                {
+                    startMatch = false,
+                    endMatch = false,
+                    startConnection = true
+                };
+
+                var payloadJson22 = JsonSerializer.Serialize(payload22);
+                var content22 = new StringContent(payloadJson22, Encoding.UTF8, "application/json");
+                discordMessageQueue3.Enqueue(content22);
+
                 this.Server.RoundSettings.PlayersToStart = 0;
                 this.Server.ForceStartGame();
                 break;
