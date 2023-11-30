@@ -13,6 +13,8 @@ using System.Text;
 using System.Threading.Tasks;
 using static System.Formats.Asn1.AsnWriter;
 using System.Threading;
+using System.Net.Http;
+using System.Text.Json;
 
 namespace BattleBitBaseModules;
 
@@ -22,6 +24,9 @@ public class ModeratorTools : BattleBitModule
 {
     [ModuleReference]
     public CommandHandler CommandHandler { get; set; } = null!;
+    public string currentMapRotation = "";
+    public bool validRestart = false;
+
 
     public override void OnModulesLoaded()
     {
@@ -30,11 +35,17 @@ public class ModeratorTools : BattleBitModule
 
     public override Task OnConnected()
     {
-        Task.Run(playerInspection);
+        currentMapRotation = this.Server.Map;
 
+        this.Server.GamemodeRotation.SetRotation("CONQ");
+        this.Server.MapRotation.SetRotation(currentMapRotation);
+        this.Server.ServerSettings.CanVoteDay = true;
+        this.Server.ServerSettings.CanVoteNight = false;
+
+        Task.Run(playerInspection);
         return Task.CompletedTask;
     }
-
+        
     private async void playerInspection()
     {
         while (this.IsLoaded && this.Server.IsConnected)
@@ -80,14 +91,10 @@ public class ModeratorTools : BattleBitModule
     {
         this.Logger.Info($"[Restart] {(context.Source is ChatSource chatSource ? chatSource.Invoker.Name : context.Source.GetType().Name)} -> Round restarted");
 
-        var map = this.Server.Map;
-        var mode = this.Server.Gamemode;
-
         this.Server.ServerSettings.CanVoteDay = true;
-        this.Server.ServerSettings.CanVoteNight = false;
+        this.Server.ServerSettings.CanVoteNight = true;
 
-        this.Server.MapRotation.SetRotation(map);
-        this.Server.GamemodeRotation.SetRotation(mode);
+        this.Server.MapRotation.ClearRotation();
 
         var task = Task.Run(() => this.ForceEnd());
 
