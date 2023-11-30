@@ -25,6 +25,7 @@ public class ModeratorTools : BattleBitModule
     [ModuleReference]
     public CommandHandler CommandHandler { get; set; } = null!;
     public string currentMapRotation = "";
+    public string currentModRotation = "";
     public bool isDay = false;
     public bool validRestart = false;
 
@@ -37,12 +38,13 @@ public class ModeratorTools : BattleBitModule
     public override Task OnConnected()
     {
         currentMapRotation = this.Server.Map;
+        currentModRotation = this.Server.Gamemode;
         isDay = this.Server.DayNight == MapDayNight.Day;
         
-        this.Server.GamemodeRotation.SetRotation("CONQ");
 
         if(!this.validRestart) {
             this.Server.MapRotation.SetRotation(currentMapRotation);
+            this.Server.GamemodeRotation.SetRotation(currentModRotation);
         }
 
         this.validRestart = false;
@@ -110,6 +112,7 @@ public class ModeratorTools : BattleBitModule
         this.Server.ServerSettings.CanVoteNight = true;
 
         this.Server.MapRotation.ClearRotation();
+        this.Server.GamemodeRotation.ClearRotation();
 
         this.validRestart = true;
 
