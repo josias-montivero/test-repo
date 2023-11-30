@@ -44,10 +44,7 @@ public class DiscordWebhooks : BattleBitModule
         if (this.Server.RoundSettings.State == GameState.WaitingForPlayers)
         {
             this.Server.RoundSettings.PlayersToStart = 0;
-            this.Server.RoundSettings.SecondsLeft = 60;
-            this.Server.RoundSettings.TeamATickets = 10;
-            this.Server.RoundSettings.TeamBTickets = 10;
-            this.Server.RoundSettings.MaxTickets = 10;
+            this.Server.RoundSettings.SecondsLeft = 180;
             this.Server.ForceStartGame();
         }
 
@@ -115,9 +112,8 @@ public class DiscordWebhooks : BattleBitModule
                 List<object> team__a = new();
                 List<object> team__b = new();
 
-                this.Server.RoundSettings.MaxTickets = 10;
                 this.Server.RoundSettings.PlayersToStart = 0;
-                this.Server.RoundSettings.SecondsLeft = 60;
+                this.Server.RoundSettings.SecondsLeft = 180;
 
                 var payload = new Dictionary<string, object>
                 {
